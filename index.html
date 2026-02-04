@@ -6,11 +6,22 @@
 <title>Be My Valentine 💖</title>
 
 <style>
+  /* CUSTOM FONT */
+  @font-face {
+    font-family: 'Halimun';
+    src: url('Halimun-W7jn.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
   body {
     margin: 0;
     height: 100vh;
     overflow: hidden;
     font-family: 'Segoe UI', Tahoma, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   /* VIDEO BACKGROUND */
@@ -32,14 +43,13 @@
   }
 
   .card {
-    background: white;
-    padding: 2.5rem;
+    background: rgba(255,255,255,0.92);
+    padding: 2.2rem;
     border-radius: 22px;
     text-align: center;
     box-shadow: 0 15px 45px rgba(0,0,0,0.35);
     max-width: 440px;
     width: 90%;
-    margin: 10vh auto;
   }
 
   h1 { color: #e63946; margin-bottom: 0.5rem; }
@@ -49,6 +59,10 @@
   .buttons {
     position: relative;
     height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
   }
 
   button {
@@ -89,10 +103,16 @@
     }
   }
 
-  /* LETTER */
+  /* LOVE LETTER */
+  .letter {
+    font-family: 'Halimun', cursive;
+  }
+
   .letter p {
     opacity: 0;
     animation: reveal 1s forwards;
+    font-size: 1.25rem;
+    line-height: 1.6;
   }
 
   @keyframes reveal {
@@ -100,17 +120,37 @@
   }
 
   .final-love {
-    margin-top: 1.5rem;
-    font-size: 1.2rem;
-    font-weight: bold;
+    margin-top: 1.4rem;
+    font-family: 'Halimun', cursive;
+    font-size: 1.35rem;
     color: #e63946;
+    opacity: 0;
+    animation: reveal 1s forwards;
+    animation-delay: 6.5s;
+  }
+
+  /* MOBILE OPTIMIZATION */
+  @media (max-width: 600px) {
+    .card {
+      max-width: 320px;
+      padding: 1.6rem;
+      background: rgba(255,255,255,0.82);
+    }
+
+    .letter p {
+      font-size: 1.1rem;
+    }
+
+    .final-love {
+      font-size: 1.2rem;
+    }
   }
 </style>
 </head>
 
 <body>
 
-<!-- VIDEO (AUTOPLAY SAFE) -->
+<!-- VIDEO -->
 <video autoplay muted loop playsinline preload="auto">
   <source src="background.mp4" type="video/mp4">
 </video>
@@ -133,7 +173,7 @@
   </div>
 </div>
 
-<!-- LOVE LETTER + FINAL MESSAGE (TOGETHER) -->
+<!-- LOVE LETTER -->
 <div class="card hidden" id="letter">
   <h1>My Dearest Kaisha 💌</h1>
 
@@ -146,7 +186,7 @@
     <p style="animation-delay:5.5s">And honestly… if you didn’t say yes, it would still be me and you 😄</p>
   </div>
 
-  <div class="final-love" style="animation-delay:6.5s; opacity:0; animation:reveal 1s forwards;">
+  <div class="final-love">
     I love you ❤️<br>
     Today. Tomorrow. Always.
   </div>
@@ -189,7 +229,6 @@
     document.getElementById("question").classList.add("hidden");
     document.getElementById("letter").classList.remove("hidden");
 
-    // HEART FIREWORKS
     for (let i = 0; i < 40; i++) {
       const h = document.createElement("div");
       h.className = "heart firework";
@@ -202,7 +241,6 @@
       setTimeout(() => h.remove(), 1800);
     }
 
-    // CONTINUOUS HEART RAIN
     setInterval(() => {
       const h = document.createElement("div");
       h.className = "heart";
